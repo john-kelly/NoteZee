@@ -1,0 +1,30 @@
+var txt;
+
+function start() {
+    // setup local storage starting value if it needs one
+	var oldCount = localStorage.counter;
+	if (!oldCount) {
+	    localStorage.counter = 0;
+	}
+
+    // create and add an empty text element in the center of the screen
+	txt = new Text('');
+    txt.setPosition(getWidth()/2, getHeight()/2);
+    add(txt);
+
+    // setup our events
+	mouseClickMethod(onClick);
+	setTimer(draw, 40);
+}
+
+function onClick() {
+    // important note: local storage stores everything as a string!
+    // we need to parse the string into an integer before we can add 1 to it
+    var count = parseInt(localStorage.counter);
+    var newCount = count + 1;
+    localStorage.counter = newCount;
+}
+
+function draw() {
+    txt.setText(localStorage.counter);
+}
